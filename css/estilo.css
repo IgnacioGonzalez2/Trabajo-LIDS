@@ -658,3 +658,99 @@ body.index {
     background-color: rgb(10, 10, 67);
     min-width: 70px;
 }
+
+/* Segundo trabajo */
+/*Panel de control*/
+.panel-admin {
+    margin-top: 10px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    color: white; 
+    width: 100%;
+}
+
+.usuario-texto {
+    color: red; 
+    font-size: 20px; 
+    align-self: center; 
+    margin-right: 15px;
+}
+
+.panel-titulo {
+    text-align: center; 
+    margin-bottom: 5px;
+}
+
+.panel-subtitulo {
+    margin-bottom: 30px; 
+    color: #aaa;
+}
+
+.panel-seccion {
+    color: rgb(253, 204, 80); 
+    margin-bottom: 20px;
+}
+
+.contenedor-lista {
+    width: 100%; 
+    max-width: 600px; 
+    padding: 0 20px; 
+    box-sizing: border-box;
+}
+
+.tarjeta-usuario {
+    margin-bottom: 20px; 
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.tarjeta-username {
+    margin-top: 5px !important;
+}
+
+.tarjeta-email {
+    font-size: 14px; 
+    color: #e0e0e0;
+}
+
+.tarjeta-botones {
+    width: auto !important; 
+    margin: 0 !important;
+}
+
+.boton-basura-panel {
+    width: 50px !important; 
+    height: 50px !important; 
+    min-width: 50px !important;
+}
+
+.formulario-crear {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(10, 10, 67);
+    border: 3px solid white;
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+}
+
+.formulario-crear h4 {
+    margin: 0 0 15px 0;
+    color: rgb(113, 212, 95);
+    font-size: 22px;
+}
+
+.input-panel {
+    margin-bottom: 15px;
+    width: 80% !important;
+    color: white;
+    font-family: 'Bitcount Grid Double', sans-serif; 
+}

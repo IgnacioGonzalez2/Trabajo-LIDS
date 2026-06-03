@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" ng-app="miAppIndex" ng-controller="IndexController">
 
 <head>
     <meta charset="UTF-8">
-    <title>MiniTwitter</title>
-    <script src="js/index.js" defer></script>
+    <title>Gestor Multimedia - Admin</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
     <link rel="stylesheet" href="css/estilo.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap"
@@ -14,15 +17,46 @@
 </head>
 
 <body class="index">
+
     <div class="logout">
-        <p id="Titulo_2" class="logo_index">MINITWITTER</p>
+        <p id="Titulo_2" class="logo_index">PANEL DE CONTROL</p>
         <div class="botones">
-            <button id="escribir_tuit"></button>
-            <button id="perfil"></button>
-            <button id="logout">Cerrar sesión</button>
+            <span class="usuario-texto">
+                Hola, {{ usuarioConectado }}
+            </span>
+            <button id="logout" ng-click="cerrarSesion()">Cerrar sesión</button>
         </div>
     </div>
-    <div id="muro"></div>
+
+    <div class="panel-admin">
+
+        <h3 class="panel-seccion">Gestión de Usuarios</h3>
+        <div class="formulario-crear">
+            <h4>Añadir Nuevo Usuario</h4>
+
+            <input type="text" class="input-panel" placeholder="Nombre" ng-model="nuevoUsuario.name">
+
+            <input type="email" class="input-panel" placeholder="Correo electrónico" ng-model="nuevoUsuario.email">
+
+            <button id="login" ng-click="crearUsuario()">Añadir</button>
+        </div>F
+        <div class="contenedor-lista">
+
+            <div class="tuits tarjeta-usuario" ng-repeat="u in listaUsuarios">
+                <div>
+                    <p class="username tarjeta-username">{{ u.name }}</p>
+                    <p class="tarjeta-email">Email: {{ u.email }}</p>
+                </div>
+
+                <div class="botones_tuit tarjeta-botones">
+                    <button class="basura boton-basura-panel" ng-click="borrarUsuario(u.id)"></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
 </body>
 
 </html>
