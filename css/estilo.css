@@ -1,0 +1,660 @@
+/* Comunes */
+
+body {
+    background-color: midnightblue;
+    font-family: 'Bitcount Grid Double', sans-serif;
+    background-image: url('../imgs/fondo.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+button,
+input {
+    border-radius: 15px;
+    border: 3px solid white;
+    outline: 3px solid #ff00ff;
+    padding: 15px 25px;
+    font-size: 16px;
+    width: 200px;
+    background-color: rgb(10, 10, 67);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+}
+
+button:hover {
+    background-color: #979797 !important;
+}
+
+button:active {
+    background-color: #ffffff !important;
+}
+
+button {
+    font-family: 'Bitcount Grid Double', sans-serif;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+    font-size: 16px;
+    padding: 10px 20px;
+    color: white;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+}
+
+/* Tuit */
+
+.tuits {
+    background-color: rgb(10, 10, 67);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+    padding: 15px 30px;
+    border-radius: 15px;
+    border: 3px solid white;
+    color: white;
+    display: flex;
+    cursor: pointer;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.tuits:hover {
+    background-color: #8a8a8a !important;
+}
+
+.tuits.tuit-seleccionado {
+    background-color: #ffffff !important;
+    transform: scale(0.995);
+}
+
+.tuits.tuit-seleccionado .username,
+.tuits.tuit-seleccionado .texto {
+    color: #000 !important;
+}
+
+.tuits.tuit-seleccionado .tuit_completo {
+    color: #000 !important;
+}
+
+.username {
+    font-size: 27px;
+    color: red;
+    font-style: italic;
+    background-color: #040427;
+    border-radius: 15px;
+    padding: 5px 20px;
+    text-align: left;
+    margin: 0 0 10px 0;
+    width: fit-content;
+    display: block;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+}
+
+.like.blanco-activo {
+    background-image: url('../imgs/like.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    background-color: #f0f0f1 !important;
+    border: 3px solid white !important;
+    box-shadow: 0 0 10px #ff00ff !important;
+}
+
+.like.blanco-activo:hover {
+    background-image: url('../imgs/like.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    background-color: #959595 !important;
+    border: 3px solid white !important;
+    box-shadow: 0 0 10px #ff00ff !important;
+}
+
+.rt.blanco-activo {
+    background-image: url('../imgs/rt.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    background-color: #f0f0f1 !important;
+    border: 3px solid white !important;
+    box-shadow: 0 0 10px #ff00ff !important;
+}
+
+.rt.blanco-activo:hover {
+    background-image: url('../imgs/rt.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    background-color: #959595 !important;
+    border: 3px solid white !important;
+    box-shadow: 0 0 10px #ff00ff !important;
+}
+
+#logout {
+    height: 50px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    outline-width: 1px;
+    font-size: 19px;
+    margin-top: 12px;
+
+}
+
+.botones_tuit {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.botones_tuit button {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.botones_tuit button#like {
+    background-image: url('../imgs/like.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    background-color: rgb(10, 10, 67);
+}
+
+.botones_tuit button#rt {
+    background-image: url('../imgs/rt.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    background-color: rgb(10, 10, 67);
+}
+
+.botones_tuit button#responder {
+    background-image: url('../imgs/responder.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 120%;
+    background-color: rgb(10, 10, 67);
+}
+
+.botones_tuit button.basura {
+    background-image: url('../imgs/Basura.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%;
+    background-color: rgb(10, 10, 67);
+}
+
+/* También aplicar estilos por clase para botones dinámicos en respuestas */
+.botones_tuit button.like {
+    background-image: url('../imgs/like.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    background-color: rgb(10, 10, 67);
+}
+.botones_tuit button.rt {
+    background-image: url('../imgs/rt.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    background-color: rgb(10, 10, 67);
+}
+.botones_tuit button.responder_resp {
+    background-image: url('../imgs/responder.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 120%;
+    background-color: rgb(10, 10, 67);
+}
+
+.botones_tuit button.like,
+.botones_tuit button.rt,
+.botones_tuit button.responder_resp,
+.botones_tuit button.basura {
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Login */
+
+#Titulo {
+    text-align: center;
+    color: rgb(253, 204, 80);
+    font-size: 70px;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: rgb(10, 10, 67);
+    padding: 15px 30px;
+    border-radius: 15px;
+    border: 3px solid white;
+    outline: 3px solid #ff00ff;
+    font-style: italic;
+    text-shadow: 2px 2px 0px #ff00ff, 4px 4px 0px #00ffff;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formulario input {
+    border-radius: 15px;
+    border: 3px solid white;
+    outline: 3px solid #ff00ff;
+    width: 300px;
+    padding: 10px;
+    background-color: rgb(10, 10, 67);
+    font-family: 'Bitcount Grid Double', sans-serif;
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+}
+
+.nombre {
+    font-size: 40px;
+    color: rgb(113, 212, 95);
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+}
+
+.contraseña {
+    font-size: 40px;
+    color: red;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+
+}
+
+.login {
+    margin: 50px;
+}
+
+/* Index */
+
+body.index {
+    background-color: midnightblue;
+    font-family: 'Bitcount Grid Double', sans-serif;
+    background-image: url('../imgs/fondo.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding-top: 150px;
+}
+
+#Titulo_2 {
+    text-align: center;
+    color: rgb(253, 204, 80);
+    font-size: 70px;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 2px;
+    background-color: rgb(10, 10, 67);
+    padding: 15px 30px;
+    border-radius: 15px;
+    border: 3px solid white;
+    outline: 3px solid #ff00ff;
+    font-style: italic;
+    text-shadow: 2px 2px 0px #ff00ff, 4px 4px 0px #00ffff;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+
+}
+
+.logout {
+    background-color: rgb(10, 10, 67);
+    background-attachment: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 150px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    border: none;
+    box-shadow: none;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+#perfil {
+    border-radius: 50%;
+    width: 120px;
+    height: 70px;
+    width: 70px;
+    margin-top: 0px;
+}
+
+#escribir_tuit {
+    border-radius: 50%;
+    width: 120px;
+    height: 70px;
+    width: 70px;
+    margin-top: 0px;
+}
+
+.botones {
+    display: flex;
+    align-items: right;
+    gap: 20px;
+}
+
+.botones button#perfil {
+    background-image: url('../imgs/perfil.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    background-color: rgb(10, 10, 67);
+}
+
+
+.botones button#escribir_tuit {
+    background-image: url('../imgs/escribir.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    background-color: rgb(10, 10, 67);
+}
+
+.logo_index {
+    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+}
+
+/* Perfil */
+
+.botones_perfil button#escribir_tuit_usuario {
+    background-image: url('../imgs/escribir.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    background-color: rgb(10, 10, 67);
+}
+
+.botones_perfil button#volver {
+    background-image: url('../imgs/tuits.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    background-color: rgb(10, 10, 67);
+}
+
+.nombre_de_usuario {
+    text-align: left;
+    color: red;
+    font-size: 70px;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+    width: fit-content;
+    margin: 20px 0;
+    margin-top: 20px;
+    background-color: rgb(10, 10, 67);
+    padding: 15px 30px;
+    border-radius: 15px;
+    border: 3px solid white;
+    outline: 3px solid #ff00ff;
+    font-style: italic;
+    text-shadow: 1px 1px 0px #0de8fc;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+}
+
+.botones_perfil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 30px;
+    margin: 0;
+    position: relative;
+
+}
+
+#escribir_tuit_usuario {
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    margin-top: 0;
+    margin-bottom: 0;
+    transform: translateY(-2px);
+}
+
+#volver {
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#volver_tuits {
+    font-size: 18px;
+}
+
+.nombre_de_usuario_tuit {
+    text-align: center;
+    color: red;
+    font-size: 50px;
+    max-width: 90%;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+    width: 490px;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(10, 10, 67);
+    padding: 15px 30px;
+    border-radius: 15px;
+    border: 3px solid white;
+    outline: 3px solid #ff00ff;
+    font-style: italic;
+    text-shadow: 1px 1px 0px #0de8fc;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+}
+
+.botones_perfil #logout,
+.botones_escribir #logout {
+    position: absolute;
+    right: clamp(36px, 6vw, 90px);
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: 0;
+}
+
+.interacciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+#mis_tuits {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    background-color: rgb(10, 10, 67);
+    height: 40px;
+    width: 725px;
+}
+
+#me_gusta {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    background-color: rgb(10, 10, 67);
+    height: 40px;
+    width: 725px;
+}
+
+#muro_perfil {
+    margin: 20px auto;
+}
+
+.interacciones button.activo {
+    background-color: #ffffff !important;
+    color: rgb(10, 10, 67) !important;
+    text-shadow: none;
+}
+
+/* Escribir */
+
+#tuit_input {
+    margin: 20px auto;
+    display: block;
+    width: 500px;
+    height: 200px;
+    font-size: 18px;
+}
+
+#publicar_tuit {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 150px;
+    height: 50px;
+    gap: 2000px;
+}
+
+#publicar_tuit_perfil {
+    width: 150px;
+    height: 50px;
+    margin-top: 20px;
+    text-align: center !important;
+}
+
+.escribir_tuit_perfil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin-top: 150px;
+    transform: translateX(-8px);
+}
+
+#tuit_input_perfil_texto {
+    margin-top: 20px;
+    text-align: center;
+    margin: 20px auto;
+    display: block;
+    max-width: 90%;
+    width: 500px;
+    height: 500px !important;
+    font-size: 18px;
+    font-family: 'Bitcount Grid Double', sans-serif;
+    color: white;
+}
+
+
+#tuit_input_perfil_url {
+    margin-top: 20px;
+    text-align: center;
+    margin: 20px auto;
+    display: block;
+    max-width: 90%;
+    width: 500px;
+    height: 500px !important;
+    font-size: 18px;
+    font-family: 'Bitcount Grid Double', sans-serif;
+    color: white;
+}
+
+.botones_escribir {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: static;
+    width: 100%;
+    height: auto;
+}
+
+.botones_escribir {
+    position: relative;
+}
+
+#volver_perfil {
+    border-radius: 50% !important;
+    width: 70px;
+    height: 70px;
+    margin-right: 20px;
+    background-image: url('../imgs/perfil.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    background-color: rgb(10, 10, 67);
+    min-width: 70px;
+}
+
+#Titulo_escribir {
+    text-align: center;
+    color: rgb(253, 204, 80);
+    font-size: 70px;
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+    width: 530px;
+    margin: 40px;
+    background-color: rgb(10, 10, 67);
+    padding: 15px 30px;
+    border-radius: 15px;
+    border: 3px solid white;
+    outline: 3px solid #ff00ff;
+    font-style: italic;
+    text-shadow: 2px 2px 0px #ff00ff, 4px 4px 0px #00ffff;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+
+}
+
+.volver_perfil_escribir {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    background-image: url('../imgs/tuits.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    background-color: rgb(10, 10, 67);
+    min-width: 70px;
+}

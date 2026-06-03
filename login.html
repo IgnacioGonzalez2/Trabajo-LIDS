@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="miApp">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../imgs/Pestaña.png">
+</head>
+
+<body ng-controller="LoginController">
+    <div>
+        <h1 id="Titulo" class="logo">MINITWIITER</h1>
+    </div>
+    <div class="formulario">
+        <p class="nombre">Nombre de usuario</p>
+        
+        <input type="text" id="usuario" ng-model="datos.user">
+        <br>
+        <p class="contraseña">Contraseña</p>
+        
+        <input type="password" id="password" ng-model="datos.passwd">
+        <br>
+        
+        <button id="login" class="login" ng-click="intentarEntrar()">¡INICIAR SESIÓN!</button>
+    </div>
+
+    <script src="../js/login.js"></script>
+</body>
+
+</html>
