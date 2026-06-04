@@ -7,6 +7,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 
+    <script src="js/index.js"></script>
+
     <link rel="stylesheet" href="css/estilo.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,35 +30,100 @@
         </div>
     </div>
 
-    <div class="panel-admin">
+    <div class="admin-sections">
 
-        <h3 class="panel-seccion">Gestión de Usuarios</h3>
-        <div class="formulario-crear">
-            <h4>Añadir Nuevo Usuario</h4>
+        <div class="panel-admin">
 
-            <input type="text" class="input-panel" placeholder="Nombre" ng-model="nuevoUsuario.name">
+            <h3 class="panel-seccion">Gestión de Usuarios</h3>
+            <button id="toggleAgregarUsuario" ng-click="abrirFormulario()">Añadir Usuario</button>
+            <div class="formulario-crear" ng-show="mostrarFormulario">
+                <h4>Añadir Nuevo Usuario</h4>
 
-            <input type="email" class="input-panel" placeholder="Correo electrónico" ng-model="nuevoUsuario.email">
+                <input type="text" class="input-panel" placeholder="Nombre" ng-model="nuevoUsuario.name">
 
-            <button id="login" ng-click="crearUsuario()">Añadir</button>
-        </div>F
-        <div class="contenedor-lista">
+                <input type="email" class="input-panel" placeholder="Correo electrónico" ng-model="nuevoUsuario.email">
 
-            <div class="tuits tarjeta-usuario" ng-repeat="u in listaUsuarios">
-                <div>
-                    <p class="username tarjeta-username">{{ u.name }}</p>
-                    <p class="tarjeta-email">Email: {{ u.email }}</p>
+                <button id="login" ng-click="crearUsuario()">Añadir</button>
+            </div>
+            <div class="contenedor-lista">
+
+                <div class="tuits tarjeta-usuario" ng-repeat="u in listaUsuarios">
+                    <div>
+                        <p class="username tarjeta-username">{{ u.name }}</p>
+                        <p class="tarjeta-email">Email: {{ u.email }}</p>
+                    </div>
+
+                    <div class="botones_tuit tarjeta-botones">
+                        <button class="basura boton-basura-panel" ng-click="borrarUsuario(u.id)"></button>
+                    </div>
                 </div>
 
-                <div class="botones_tuit tarjeta-botones">
-                    <button class="basura boton-basura-panel" ng-click="borrarUsuario(u.id)"></button>
-                </div>
             </div>
 
         </div>
-    </div>
 
-    <script src="js/index.js"></script>
+        <div class="categorias-panel">
+            <h3 class="panel-seccion">Gestión de Categorías</h3>
+
+            <button id="toggleAgregarCategoria" ng-click="alternarFormularioCategoria()">Añadir Categoría</button>
+
+            <div class="formulario-crear" ng-show="mostrarFormularioCategoria">
+                <h4>Añadir Nueva Categoría</h4>
+
+                <input type="text" class="input-panel" placeholder="Nombre" ng-model="nuevaCategoria.name">
+
+                <button ng-click="crearCategoria()">Añadir</button>
+            </div>
+
+            <div class="contenedor-lista">
+
+                <div class="tuits tarjeta-usuario" ng-repeat="c in listaCategorias">
+                    <div>
+                        <p class="username tarjeta-username">{{ c.name }}</p>
+                    </div>
+
+                    <div class="botones_tuit tarjeta-botones">
+                        <button class="basura boton-basura-panel" ng-click="borrarCategoria(c.id)"></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="video-panel">
+            <h3 class="panel-seccion">Gestión de Vídeos</h3>
+
+            <button id="toggleAgregarVideo" ng-click="alternarFormularioVideo()">Añadir Vídeo</button>
+
+            <div class="formulario-crear" ng-show="mostrarFormularioVideo">
+                <h4>Añadir Nuevo Vídeo</h4>
+
+                <input type="text" class="input-panel" placeholder="Título" ng-model="nuevoVideo.titulo">
+
+                <input type="text" class="input-panel" placeholder="URL" ng-model="nuevoVideo.url">
+
+                <input type="text" class="input-panel" placeholder="Categoría" ng-model="nuevoVideo.categoria">
+
+                <button ng-click="crearVideo()">Añadir</button>
+            </div>
+
+            <div class="contenedor-lista">
+
+                <div class="tuits tarjeta-usuario" ng-repeat="v in listaVideos">
+                    <div>
+                        <p class="username tarjeta-username">{{ v.titulo }}</p>
+                        <p class="tarjeta-email" ng-if="v.url">URL: {{ v.url }}</p>
+                        <p class="tarjeta-email" ng-if="v.categoria">Categoría: {{ v.categoria }}</p>
+                    </div>
+
+                    <div class="botones_tuit tarjeta-botones">
+                        <button class="basura boton-basura-panel" ng-click="borrarVideo(v.id)"></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

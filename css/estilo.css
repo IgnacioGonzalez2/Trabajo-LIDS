@@ -305,7 +305,7 @@ body.index {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    padding-top: 150px;
+    padding-top: 120px;
 }
 
 #Titulo_2 {
@@ -689,13 +689,13 @@ body.index {
 
 .panel-seccion {
     color: rgb(253, 204, 80); 
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .contenedor-lista {
     width: 100%; 
-    max-width: 600px; 
-    padding: 0 20px; 
+    max-width: none; 
+    padding: 0 24px; 
     box-sizing: border-box;
 }
 
@@ -705,10 +705,18 @@ body.index {
     align-items: center; 
     width: 100%; 
     box-sizing: border-box;
+    gap: 16px;
+}
+
+.tarjeta-usuario > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 .tarjeta-username {
     margin-top: 5px !important;
+    max-width: 100%;
+    word-break: break-word;
 }
 
 .tarjeta-email {
@@ -719,6 +727,7 @@ body.index {
 .tarjeta-botones {
     width: auto !important; 
     margin: 0 !important;
+    flex: 0 0 auto;
 }
 
 .boton-basura-panel {
@@ -736,7 +745,7 @@ body.index {
     border-radius: 15px;
     padding: 20px;
     width: 100%;
-    max-width: 600px;
+    max-width: none;
     box-sizing: border-box;
     margin-bottom: 40px;
     box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
@@ -750,7 +759,91 @@ body.index {
 
 .input-panel {
     margin-bottom: 15px;
-    width: 80% !important;
+    width: 85% !important;
     color: white;
     font-family: 'Bitcount Grid Double', sans-serif; 
+}
+
+.admin-sections {
+    display: flex;
+    gap: 64px;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 25px 30px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+.panel-admin,
+.categorias-panel,
+.video-panel {
+    flex: 1 1 0;
+    min-width: 320px;
+    max-width: none;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+@media (max-width: 900px) {
+    .admin-sections {
+        flex-direction: column;
+        padding: 10px;
+        gap: 20px;
+    }
+}
+
+#toggleAgregarUsuario {
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 12px auto 22px auto;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 15px;
+    border: 3px solid white;
+    background-color: rgb(10, 10, 67);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+}
+
+#toggleAgregarVideo {
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 12px auto 22px auto;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 15px;
+    border: 3px solid white;
+    background-color: rgb(10, 10, 67);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+}
+
+#toggleAgregarCategoria {
+    display: block;
+    width: 100%;
+    max-width: none;
+    margin: 12px auto 22px auto;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 15px;
+    border: 3px solid white;
+    background-color: rgb(10, 10, 67);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+}
+
+.admin-sections > .panel-admin,
+.admin-sections > .categorias-panel,
+.admin-sections > .video-panel {
+    margin-top: 0;
+    align-self: stretch;
 }
