@@ -3,8 +3,8 @@
 var app = angular.module('miApp', []);
 
 //Luego creo el controlador que se encargará de gestionar la lógica de mi página de login
-app.controller('LoginController', function($scope) {
-    
+app.controller('LoginController', function ($scope, $http) {
+
     // Indico donde se guardaran los datos del usuario y contraseña que el usuario introduzca en el formulario de login
     $scope.datos = {
         user: '',
@@ -12,14 +12,31 @@ app.controller('LoginController', function($scope) {
     };
 
     //Finalemente creo la función que se ejecutará al hacer click en el botón de "Entrar" del formulario de login
-    $scope.intentarEntrar = function() {
-        
-        //Guardo del sesion storage tanto el usuario como el token de la sesion
-        sessionStorage.setItem("Usuario", $scope.datos.user);
+    $scope.intentarEntrar = function () {
 
-        sessionStorage.setItem("token", "token_falso_de_prueba_12345");
-        
-        //Redirijo a la página principal  
-        window.location.href = "index.html";
+        // Hago una petición POST real a la ruta '/login' de tu servidor local
+        $http.post('/login', $scope.datos)
+            .then(function (respuesta) {
+                // Si el servidor confirma, nos devuelve el token y el id del usuario
+                console.log("El servidor responde:", respuesta.data);
+
+                if (respuesta.data && respuesta.data.session_id) {
+                    // Guardo los datos reales en la memoria del navegador
+                    sessionStorage.setItem("token", respuesta.data.session_id);
+                    sessionStorage.setItem("Usuario", $scope.datos.user);
+                    sessionStorage.setItem("Id_usuario", respuesta.data.session_id);
+
+                    //Redirijo a la página principal  
+                    window.location.href = "index.html";
+                } else {
+                    alert("El usuario o la contraseña no son correctos.");
+                }
+            })
+
+            .catch(function (error) {
+                // Si las credenciales están mal o el usuario no existe, el servidor escupirá un error
+                console.error("Error en el inicio de sesión:", error);
+                alert("El usuario o la contraseña no son correctos.");
+            });
     };
 });

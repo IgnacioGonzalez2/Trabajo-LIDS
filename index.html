@@ -109,16 +109,26 @@
 
             <div class="contenedor-lista">
 
-                <div class="tuits tarjeta-usuario" ng-repeat="v in listaVideos">
-                    <div>
-                        <p class="username tarjeta-username">{{ v.titulo }}</p>
-                        <p class="tarjeta-email" ng-if="v.url">URL: {{ v.url }}</p>
-                        <p class="tarjeta-email" ng-if="v.categoria">Categoría: {{ v.categoria }}</p>
+                                <div ng-repeat="cat in listaCategorias" style="margin-bottom: 25px;">
+                    
+                                        <p class="username" style="color: #00ffff; font-size: 1.1em; border-bottom: 1px dashed #ff00ff; padding-bottom: 5px; margin-bottom: 10px;">
+                        📂 {{ cat.name }}
+                    </p>
+
+                                        <div class="tuits tarjeta-usuario" ng-repeat="v in listaVideos | filter:{categoria: cat.name}:true">
+                        <div>
+                            <p class="username tarjeta-username">{{ v.titulo }}</p>
+                            <p class="tarjeta-email" ng-if="v.url">URL: {{ v.url }}</p>
+                        </div>
+
+                        <div class="botones_tuit tarjeta-botones">
+                            <button class="basura boton-basura-panel" ng-click="borrarVideo(v.id)"></button>
+                        </div>
                     </div>
 
-                    <div class="botones_tuit tarjeta-botones">
-                        <button class="basura boton-basura-panel" ng-click="borrarVideo(v.id)"></button>
-                    </div>
+                                        <p class="tarjeta-email" ng-if="(listaVideos | filter:{categoria: cat.name}:true).length === 0" style="font-style: italic; opacity: 0.5; padding-left: 10px;">
+                        Sin vídeos asignados
+                    </p>
                 </div>
 
             </div>
