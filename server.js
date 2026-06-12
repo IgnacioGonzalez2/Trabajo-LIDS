@@ -23,10 +23,11 @@ const router = express.Router();
 
 // cargar el módulo para bases de datos SQLite
 var sqlite3 = require('sqlite3').verbose();
+const path = require('path');
 
 // Abrir nuestra base de datos
 var db = new sqlite3.Database(
-    'multimedia.db',    // nombre del fichero de base de datos
+    path.join(__dirname, 'multimedia.db'),    // nombre del fichero de base de datos
     (err) => { // funcion que será invocada con el resultado
         if (err)      // Si ha ocurrido un error
             console.log(err);  // Mostrarlo por la consola del servidor
@@ -58,6 +59,8 @@ db.serialize(() => {
         session_id TEXT PRIMARY KEY,
         user_id INTEGER
     )`);
+
+    db.run("UPDATE users SET login='admin', name='Administrador', email='admin@mycompany.com', passwd='admin' WHERE id=1");
 
     db.get("SELECT COUNT(*) as count FROM users", (err, row) => {
         if (row && row.count === 0) {
@@ -135,6 +138,45 @@ function processBorrarUsuario(req, res, db) {
     });
 }
 
+function processModificarUsuario(req, res, db) {
+    var id = req.body.id;
+    var name = req.body.name;
+    var email = req.body.email;
+    var passwd = req.body.passwd;
+    db.run('UPDATE users SET login=?, name=?, email=?, passwd=? WHERE id=?', [name, name, email, passwd, id], () => {
+        res.json({ message: 'Usuario modificado con éxito' });
+    });
+}
+
+function processModificarCategoria(req, res, db) {
+    var id = req.body.id;
+    var name = req.body.name;
+    db.get('SELECT name FROM categories WHERE id=?', [id], (err, row) => {
+        if (!row) {
+            res.json({ errormsg: 'Peticion mal formada' });
+            return;
+        }
+
+        var oldName = row.name;
+
+        db.run('UPDATE categories SET name=? WHERE id=?', [name, id], () => {
+            db.run('UPDATE videos SET categoria=? WHERE categoria=?', [name, oldName], () => {
+                res.json({ message: 'Categoría modificada con éxito' });
+            });
+        });
+    });
+}
+
+function processModificarVideo(req, res, db) {
+    var id = req.body.id;
+    var titulo = req.body.titulo;
+    var url = req.body.url;
+    var categoria = req.body.categoria;
+    db.run('UPDATE videos SET titulo=?, url=?, categoria=? WHERE id=?', [titulo, url, categoria, id], () => {
+        res.json({ message: 'Vídeo modificado con éxito' });
+    });
+}
+
 function processListarCategorias(req, res, db) {
     db.all('SELECT * FROM categories', [], (err, rows) => {
         // enviar en la respuesta serializado en formato JSON
@@ -167,8 +209,15 @@ function processCrearVideo(req, res, db) {
     var titulo = req.body.titulo;
     var url = req.body.url;
     var categoria = req.body.categoria;
-    db.run('INSERT INTO videos (titulo, url, categoria) VALUES (?, ?, ?)', [titulo, url, categoria], function() {
-        res.json({ id: this.lastID, titulo: titulo, url: url, categoria: categoria });
+    db.get('SELECT name FROM categories WHERE name=?', [categoria], (err, row) => {
+        if (!row) {
+            res.json({ errormsg: 'Debes introducir una categoría valida' });
+            return;
+        }
+
+        db.run('INSERT INTO videos (titulo, url, categoria) VALUES (?, ?, ?)', [titulo, url, categoria], function() {
+            res.json({ id: this.lastID, titulo: titulo, url: url, categoria: categoria });
+        });
     });
 }
 
@@ -288,11 +337,41 @@ router.delete('/video/:session_id/:id', (req, res) => {
     });
 });
 
+router.put('/user', (req, res) => {
+    verificarSesion(req.body.session_id, (valid) => {
+        if (valid && req.body.id && req.body.name && req.body.email && req.body.passwd) {
+            processModificarUsuario(req, res, db);
+        } else {
+            res.json({ errormsg: 'Peticion mal formada'});
+        }
+    });
+});
+
+router.put('/category', (req, res) => {
+    verificarSesion(req.body.session_id, (valid) => {
+        if (valid && req.body.id && req.body.name) {
+            processModificarCategoria(req, res, db);
+        } else {
+            res.json({ errormsg: 'Peticion mal formada'});
+        }
+    });
+});
+
+router.put('/video', (req, res) => {
+    verificarSesion(req.body.session_id, (valid) => {
+        if (valid && req.body.id && req.body.titulo && req.body.url && req.body.categoria) {
+            processModificarVideo(req, res, db);
+        } else {
+            res.json({ errormsg: 'Peticion mal formada'});
+        }
+    });
+});
+
 // Añadir las rutas al servidor
 server.use('/', router);
 
 // Añadir las rutas estáticas al servidor.
-server.use(express.static('.'));
+server.use(express.static(__dirname));
 
 // Poner en marcha el servidor ...
 server.listen(port, () => {

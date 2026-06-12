@@ -53,12 +53,13 @@ app.controller('IndexController', function ($scope, $http) {
     //Creo un objeto para almacenar los datos del nuevo usuario que se introduzcan en el formulario de añadir usuario.
     $scope.nuevoUsuario = {
         name: '',
-        email: ''
+        email: '',
+        passwd: ''
     };
 
     $scope.crearUsuario = function () {
         //Compruebo que el usuario no haya dejado los campos vacíos
-        if ($scope.nuevoUsuario.name === '' || $scope.nuevoUsuario.email === '') {
+        if ($scope.nuevoUsuario.name === '' || $scope.nuevoUsuario.email === '' || $scope.nuevoUsuario.passwd === '') {
             alert("Por favor, rellena todos los campos.");
             return;
         }
@@ -67,13 +68,14 @@ app.controller('IndexController', function ($scope, $http) {
             session_id: token,
             name: $scope.nuevoUsuario.name,
             email: $scope.nuevoUsuario.email,
-            passwd: 'password_generico'
+            passwd: $scope.nuevoUsuario.passwd
         }).then(function (respuesta) {
             if (!respuesta.data.errormsg) {
                 cargarUsuarios();
                 // Limpio los cuadros de texto de la pantalla para que queden vacíos otra vez
                 $scope.nuevoUsuario.name = '';
                 $scope.nuevoUsuario.email = '';
+                $scope.nuevoUsuario.passwd = '';
                 alert("¡Usuario añadido con éxito!");
             }
         });
@@ -164,8 +166,15 @@ app.controller('IndexController', function ($scope, $http) {
     //Funcionalidad 12: Añadir nuevo vídeo
     //Al hacer click en el botón de añadir vídeo, compruebo que los campos no estén vacíos, añado el nuevo vídeo a la lista y limpio los campos del formulario.
     $scope.crearVideo = function () {
-        if ($scope.nuevoVideo.titulo === '' || $scope.nuevoVideo.url === '') {
-            alert("Por favor, rellena al menos el título y la URL del vídeo.");
+        if ($scope.nuevoVideo.titulo === '' || $scope.nuevoVideo.url === '' || $scope.nuevoVideo.categoria === '') {
+            alert("Por favor, rellena con un título, URL del vídeo y una categoría valida.");
+            return;
+        }
+
+        if (!$scope.nuevoVideo.categoria || !$scope.listaCategorias.some(function (categoria) {
+            return categoria.name === $scope.nuevoVideo.categoria;
+        })) {
+            alert("Debes introducir una categoría valida");
             return;
         }
 
@@ -173,7 +182,7 @@ app.controller('IndexController', function ($scope, $http) {
             session_id: token,
             titulo: $scope.nuevoVideo.titulo,
             url: $scope.nuevoVideo.url,
-            categoria: $scope.nuevoVideo.categoria || ''
+            categoria: $scope.nuevoVideo.categoria
         }).then(function (respuesta) {
             if (!respuesta.data.errormsg) {
                 cargarVideos();
@@ -199,6 +208,69 @@ app.controller('IndexController', function ($scope, $http) {
 
     $scope.alternarFormularioVideo = function () {
         $scope.mostrarFormularioVideo = !$scope.mostrarFormularioVideo;
+    };
+
+    //Funcionalidad 15: Modificar usuario existente
+    $scope.modificarUsuario = function (usuario) {
+        var nuevoNombre = prompt("Introduce el nuevo nombre:", usuario.name);
+        var nuevoEmail = prompt("Introduce el nuevo correo electrónico:", usuario.email);
+        var nuevaPasswd = prompt("Introduce la nueva contraseña:", "");
+        
+        if (!nuevoNombre || !nuevoEmail || !nuevaPasswd) return;
+
+        $http.put('/user', {
+            session_id: token,
+            id: usuario.id,
+            name: nuevoNombre,
+            email: nuevoEmail,
+            passwd: nuevaPasswd
+        }).then(function (respuesta) {
+            if (!respuesta.data.errormsg) {
+                cargarUsuarios();
+                alert("¡Usuario modificado con éxito!");
+            }
+        });
+    };
+
+    //Funcionalidad 16: Modificar categoría existente
+    $scope.modificarCategoria = function (categoria) {
+        var nuevoNombre = prompt("Introduce el nuevo nombre de la categoría:", categoria.name);
+        
+        if (!nuevoNombre) return;
+
+        $http.put('/category', {
+            session_id: token,
+            id: categoria.id,
+            name: nuevoNombre
+        }).then(function (respuesta) {
+            if (!respuesta.data.errormsg) {
+                cargarCategorias();
+                cargarVideos();
+                alert("¡Categoría modificada con éxito!");
+            }
+        });
+    };
+
+    //Funcionalidad 17: Modificar vídeo existente
+    $scope.modificarVideo = function (video) {
+        var nuevoTitulo = prompt("Introduce el nuevo título del vídeo:", video.titulo);
+        var nuevaUrl = prompt("Introduce la nueva URL del vídeo:", video.url);
+        var nuevaCategoria = prompt("Introduce la nueva categoría del vídeo:", video.categoria);
+        
+        if (!nuevoTitulo || !nuevaUrl || !nuevaCategoria) return;
+
+        $http.put('/video', {
+            session_id: token,
+            id: video.id,
+            titulo: nuevoTitulo,
+            url: nuevaUrl,
+            categoria: nuevaCategoria
+        }).then(function (respuesta) {
+            if (!respuesta.data.errormsg) {
+                cargarVideos();
+                alert("¡Vídeo modificado con éxito!");
+            }
+        });
     };
 
 });

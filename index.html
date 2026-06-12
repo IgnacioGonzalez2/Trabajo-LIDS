@@ -43,6 +43,8 @@
 
                 <input type="email" class="input-panel" placeholder="Correo electrónico" ng-model="nuevoUsuario.email">
 
+                <input type="password" class="input-panel" placeholder="Contraseña" ng-model="nuevoUsuario.passwd">
+
                 <button id="login" ng-click="crearUsuario()">Añadir</button>
             </div>
             <div class="contenedor-lista">
@@ -53,7 +55,8 @@
                         <p class="tarjeta-email">Email: {{ u.email }}</p>
                     </div>
 
-                    <div class="botones_tuit tarjeta-botones">
+                    <div class="botones_tuit tarjeta-botones acciones-admin">
+                        <button class="boton-editar-panel" ng-click="modificarUsuario(u)"></button>
                         <button class="basura boton-basura-panel" ng-click="borrarUsuario(u.id)"></button>
                     </div>
                 </div>
@@ -82,7 +85,8 @@
                         <p class="username tarjeta-username">{{ c.name }}</p>
                     </div>
 
-                    <div class="botones_tuit tarjeta-botones">
+                    <div class="botones_tuit tarjeta-botones acciones-admin">
+                        <button class="boton-editar-panel" ng-click="modificarCategoria(c)"></button>
                         <button class="basura boton-basura-panel" ng-click="borrarCategoria(c.id)"></button>
                     </div>
                 </div>
@@ -109,24 +113,25 @@
 
             <div class="contenedor-lista">
 
-                                <div ng-repeat="cat in listaCategorias" style="margin-bottom: 25px;">
+                <div ng-repeat="cat in listaCategorias" style="margin-bottom: 25px;">
                     
-                                        <p class="username" style="color: #00ffff; font-size: 1.1em; border-bottom: 1px dashed #ff00ff; padding-bottom: 5px; margin-bottom: 10px;">
+                    <p class="username" style="color: #00ffff; font-size: 1.1em; border-bottom: 1px dashed #ff00ff; padding-bottom: 5px; margin-bottom: 10px;">
                         📂 {{ cat.name }}
                     </p>
 
-                                        <div class="tuits tarjeta-usuario" ng-repeat="v in listaVideos | filter:{categoria: cat.name}:true">
+                    <div class="tuits tarjeta-usuario" ng-repeat="v in listaVideos | filter:{categoria: cat.name}:true">
                         <div>
                             <p class="username tarjeta-username">{{ v.titulo }}</p>
                             <p class="tarjeta-email" ng-if="v.url">URL: {{ v.url }}</p>
                         </div>
 
-                        <div class="botones_tuit tarjeta-botones">
+                        <div class="botones_tuit tarjeta-botones acciones-admin">
+                            <button class="boton-editar-panel" ng-click="modificarVideo(v)"></button>
                             <button class="basura boton-basura-panel" ng-click="borrarVideo(v.id)"></button>
                         </div>
                     </div>
 
-                                        <p class="tarjeta-email" ng-if="(listaVideos | filter:{categoria: cat.name}:true).length === 0" style="font-style: italic; opacity: 0.5; padding-left: 10px;">
+                    <p class="tarjeta-email" ng-if="(listaVideos | filter:{categoria: cat.name}:true).length === 0" style="font-style: italic; opacity: 0.5; padding-left: 10px;">
                         Sin vídeos asignados
                     </p>
                 </div>
